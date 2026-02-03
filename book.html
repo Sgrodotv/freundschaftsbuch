@@ -2,22 +2,25 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Freundschaftsbuch</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="card">
-    <h1>📚 Freundschaftsbuch</h1>
+
+  <div class="card">
+    <h1>📖 Freundschaftsbuch</h1>
 
     <div id="entries">
-      <p>Lade Einträge …</p>
+      <!-- Einträge werden hier per JS eingefügt -->
     </div>
 
-    <a href="index.html">← zurück</a>
-  </main>
+    <a href="new.html">✍️ Neuen Eintrag erstellen</a>
+  </div>
 
+  <!-- Supabase MUSS vor script.js -->
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
+  <script src="script.js"></script>
+
 </body>
 </html>
-
