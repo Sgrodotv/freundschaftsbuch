@@ -2,49 +2,52 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>Neuer Eintrag</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neuer Eintrag – Freundschaftsbuch</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="card">
+
+  <div class="card">
     <h1>✍️ Neuer Eintrag</h1>
 
     <form id="entryForm">
       <label>
-        Selfie:
-        <input type="file" id="image" accept="image/*" required />
-      </label>
-
-      <label>
-        Name:
+        Dein Name
         <input type="text" id="name" required />
       </label>
 
       <label>
-        Lieblingsessen:
+        Lieblingsessen
         <input type="text" id="food" />
       </label>
 
       <label>
-        Lieblingssong:
+        Lieblingssong
         <input type="text" id="song" />
       </label>
 
       <label>
-        Gruß:
+        Nachricht
         <textarea id="message"></textarea>
       </label>
 
-      <button type="submit" class="btn">Eintrag speichern</button>
+      <label>
+        Selfie
+        <input type="file" id="image" accept="image/*" required />
+      </label>
+
+      <button class="btn" type="submit">💾 Eintrag speichern</button>
     </form>
 
     <p id="status"></p>
-    <a href="index.html">← zurück</a>
-  </main>
 
+    <a href="book.html">📖 Freundschaftsbuch ansehen</a>
+  </div>
+
+  <!-- Supabase MUSS vor script.js -->
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>
-
