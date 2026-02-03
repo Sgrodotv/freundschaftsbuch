@@ -1,67 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Inter:wght@400;600&display=swap');
+
 body {
-  font-family: system-ui, sans-serif;
-  background: #f6f3ee;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #fdf6e3, #f5efe6);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  padding: 2rem;
+  padding: 2rem 1rem;
 }
 
 .card {
-  background: white;
+  background: #fffdf8;
   padding: 2rem;
   max-width: 420px;
   width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  border: 2px solid #f0e6d6;
 }
 
 h1 {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 2rem;
   margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+p {
+  line-height: 1.5;
 }
 
 label {
   display: block;
   margin-bottom: 1rem;
+  font-weight: 600;
 }
 
-input, textarea {
+input,
+textarea {
   width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.25rem;
+  padding: 0.6rem 0.7rem;
+  margin-top: 0.3rem;
+  border-radius: 10px;
+  border: 1.5px solid #e2d7c5;
+  font-family: 'Inter', sans-serif;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #e0b84c;
 }
 
 textarea {
   resize: vertical;
+  min-height: 80px;
 }
 
 .buttons {
   display: flex;
   gap: 1rem;
+  margin-top: 1.5rem;
 }
 
 .btn {
-  display: inline-block;
-  padding: 0.75rem 1rem;
-  background: #ffd966;
-  color: black;
+  flex: 1;
+  padding: 0.8rem 1rem;
+  background: linear-gradient(135deg, #ffe08a, #ffd24d);
+  color: #3b2f00;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 14px;
   border: none;
   cursor: pointer;
   text-align: center;
+  font-weight: 600;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .btn:hover {
-  background: #ffcc33;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #7a5c00;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .entry {
-  border-bottom: 1px dashed #ddd;
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
+  border-bottom: 2px dashed #e7dcc9;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.entry:last-child {
+  border-bottom: none;
 }
 
 .entry img {
-  max-width: 100%;
-  border-radius: 8px;
+  width: 100%;
+  border-radius: 14px;
+  margin-bottom: 0.75rem;
 }
