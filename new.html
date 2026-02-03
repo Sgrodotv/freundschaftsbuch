@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Neuer Eintrag</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <h1>✍️ Neuer Eintrag</h1>
+
+    <form id="entryForm">
+      <label>
+        Selfie:
+        <input type="file" id="image" accept="image/*" required />
+      </label>
+
+      <label>
+        Name:
+        <input type="text" id="name" required />
+      </label>
+
+      <label>
+        Lieblingsessen:
+        <input type="text" id="food" />
+      </label>
+
+      <label>
+        Lieblingssong:
+        <input type="text" id="song" />
+      </label>
+
+      <label>
+        Gruß:
+        <textarea id="message"></textarea>
+      </label>
+
+      <button type="submit" class="btn">Eintrag speichern</button>
+    </form>
+
+    <p id="status"></p>
+    <a href="index.html">← zurück</a>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
