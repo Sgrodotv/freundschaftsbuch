@@ -2,7 +2,7 @@
 const SUPABASE_URL = "https://mvladicfytndyekrbzme.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12bGFkaWNmeXRuZHlla3Jiem1lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxMzM4MjksImV4cCI6MjA4NTcwOTgyOX0.eeTXlaU-DYqQqV5h-FaRsTigRvGKLhLVBvNHvCE2DJ4";
 
-const supabaseClient = window.supabase.createClient(
+const db = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
@@ -94,4 +94,5 @@ async function loadEntries() {
     entriesDiv.appendChild(div);
   });
 }
+
 
