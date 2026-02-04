@@ -101,21 +101,24 @@
   function renderEntry() {
     const e = entries[currentIndex];
 
-    document.getElementById("entry").innerHTML = `
-      ${e.image_url ? `<img src="${e.image_url}">` : ""}
-      <h2>${e.name}</h2>
+document.getElementById("entry").innerHTML = `
+  <div class="entry">
+    ${e.image_url ? `<img src="${e.image_url}" alt="Bild">` : ""}
 
-      <p><strong>Lieblingsessen:</strong> ${e.food || "-"}</p>
-      <p><strong>Lieblingsfarbe:</strong> ${e.color || "-"}</p>
+    <h2>${e.name}</h2>
 
-      ${spotifyEmbed(e.song)}
+    <p><strong>Lieblingsessen:</strong> ${e.food || "-"}</p>
+    <p><strong>Lieblingsfarbe:</strong> ${e.color || "-"}</p>
 
-      <p>${e.message || ""}</p>
+    ${spotifyEmbed(e.song)}
 
-      <p style="text-align:center; opacity:0.6;">
-        ${currentIndex + 1} / ${entries.length}
-      </p>
-    `;
+    <p>${e.message || ""}</p>
+
+    <p style="text-align:center; opacity:0.6;">
+      ${currentIndex + 1} / ${entries.length}
+    </p>
+  </div>
+`;
   }
 
   // ==========================
@@ -140,3 +143,4 @@
 
 </body>
 </html>
+
