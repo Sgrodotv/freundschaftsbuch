@@ -141,12 +141,13 @@ button {
 .entry img {
   width: 100%;
   max-width: 260px;
-  height: 260px;
-  object-fit: cover;
+  height: 260px;        /* feste, schöne Buchgröße */
+  object-fit: cover;   /* kein Verzerren */
   display: block;
   margin: 0 auto 14px;
   border-radius: 14px;
 }
+
 
 
 
