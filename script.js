@@ -20,15 +20,18 @@ const supabaseClient = window.supabase.createClient(
 function spotifyEmbed(url) {
   if (!url) return null;
 
-  if (url.includes("spotify.com")) {
-    return url.replace(
-      "open.spotify.com/",
-      "open.spotify.com/embed/"
-    );
-  }
+  const match = url.match(
+    /spotify\.com\/(?:intl-[a-z]{2}\/)?(track|album|playlist)\/([a-zA-Z0-9]+)/
+  );
 
-  return null;
+  if (!match) return null;
+
+  const type = match[1];
+  const id = match[2];
+
+  return `https://open.spotify.com/embed/${type}/${id}`;
 }
+
 
 // ==========================
 // FORM HANDLING (new.html)
@@ -112,5 +115,6 @@ form.reset();
 
   });
 }
+
 
 
