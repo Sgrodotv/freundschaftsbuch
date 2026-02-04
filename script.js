@@ -1,122 +1,102 @@
-// ================================
-// Supabase Setup (V2 – stabil)
-// ================================
-
+// ==========================
+// SUPABASE KONFIGURATION
+// ==========================
 const SUPABASE_URL = "https://mvladicfytndyekrbzme.supabase.co";
-const SUPABASE_KEY =
+const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12bGFkaWNmeXRuZHlla3Jiem1lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxMzM4MjksImV4cCI6MjA4NTcwOTgyOX0.eeTXlaU-DYqQqV5h-FaRsTigRvGKLhLVBvNHvCE2DJ4";
 
-const db = window.supabase.createClient(
+const supabase = window.supabase.createClient(
   SUPABASE_URL,
-  SUPABASE_KEY
+  SUPABASE_ANON_KEY
 );
 
-// ================================
-// Neuer Eintrag speichern
-// ================================
+// ==========================
+// SPOTIFY HELPER
+// ==========================
+function spotifyEmbed(url) {
+  if (!url) return null;
 
+  if (url.includes("spotify.com")) {
+    return url.replace(
+      "open.spotify.com/",
+      "open.spotify.com/embed/"
+    );
+  }
+
+  return null;
+}
+
+// ==========================
+// FORM HANDLING (new.html)
+// ==========================
 const form = document.getElementById("entryForm");
 
 if (form) {
-  form.addEventListener("submit", async function (e) {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const status = document.getElementById("status");
-    status.textContent = "Speichere Eintrag …";
+    status.textContent = "Speichern läuft …";
 
-    try {
-      const name = document.getElementById("name").value;
-      const food = document.getElementById("food").value;
-      const song = document.getElementById("song").value;
-      const message = document.getElementById("message").value;
-      const imageInput = document.getElementById("image");
-      const imageFile = imageInput.files[0];
+    // Werte aus Formular
+    const name = document.getElementById("name").value;
+    const birthday = document.getElementById("birthday").value || null;
+    const food = document.getElementById("food").value;
+    const color = document.getElementById("color").value;
+    const song = document.getElementById("song").value;
+    const message = document.getElementById("message").value;
+    const imageFile = document.getElementById("image").files[0];
 
-      if (!imageFile) {
-        status.textContent = "Bitte ein Bild auswählen";
-        return;
-      }
+    let imageUrl = null;
 
-      const fileName = Date.now() + "_" + imageFile.name;
+    // ==========================
+    // BILD UPLOAD
+    // ==========================
+    if (imageFile) {
+      const fileExt = imageFile.name.split(".").pop();
+      const fileName = `${Date.now()}.${fileExt}`;
 
-      // Bild hochladen
-      const uploadResult = await db.storage
+      const { error: uploadError } = await supabase
+        .storage
         .from("images")
         .upload(fileName, imageFile);
 
-      if (uploadResult.error) {
-        console.error(uploadResult.error);
+      if (uploadError) {
+        console.error(uploadError);
         status.textContent = "Fehler beim Bild-Upload";
         return;
       }
 
-      const imageUrl =
-        SUPABASE_URL +
-        "/storage/v1/object/public/images/" +
-        fileName;
+      const { data } = supabase
+        .storage
+        .from("images")
+        .getPublicUrl(fileName);
 
-      // Daten speichern
-      const insertResult = await db
-        .from("entries")
-        .insert({
-          name: name,
-          food: food,
-          song: song,
-          message: message,
-          image_url: imageUrl
-        });
-
-      if (insertResult.error) {
-        console.error(insertResult.error);
-        status.textContent = "Fehler beim Speichern";
-        return;
-      }
-
-      status.textContent = "🎉 Eintrag gespeichert!";
-      form.reset();
-
-    } catch (err) {
-      console.error(err);
-      status.textContent = "Unerwarteter Fehler";
+      imageUrl = data.publicUrl;
     }
-  });
-}
 
-// ================================
-// Einträge anzeigen (Buch)
-// ================================
+    // ==========================
+    // DATEN SPEICHERN
+    // ==========================
+    const { error } = await supabase
+      .from("entries")
+      .insert({
+        name: name,
+        birthday: birthday,
+        food: food,
+        color: color,
+        song: song,
+        message: message,
+        image_url: imageUrl
+      });
 
-const entriesDiv = document.getElementById("entries");
+    if (error) {
+      console.error(error);
+      status.textContent = "Fehler beim Speichern";
+      return;
+    }
 
-if (entriesDiv) {
-  loadEntries();
-}
-
-async function loadEntries() {
-  const result = await db
-    .from("entries")
-    .select("*")
-    .order("created_at", { ascending: false });
-
-  if (result.error) {
-    console.error(result.error);
-    entriesDiv.innerHTML = "<p>Fehler beim Laden</p>";
-    return;
-  }
-
-  entriesDiv.innerHTML = "";
-
-  result.data.forEach(function (entry) {
-    const div = document.createElement("div");
-    div.className = "entry";
-
-    div.innerHTML =
-      '<img src="' + entry.image_url + '" alt="Selfie" />' +
-      '<h3>' + (entry.name || "") + '</h3>' +
-      '<p><strong>Lieblingsessen:</strong> ' + (entry.food || "-") + '</p>' +
-      '<p><strong>Lieblingssong:</strong> ' + (entry.song || "-") + '</p>' +
-      '<p>' + (entry.message || "") + '</p>';
-
-    entriesDiv.appendChild(div);
+    status.textContent = "Eintrag gespeichert 🎉";
+    form.reset();
   });
 }
