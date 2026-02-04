@@ -149,6 +149,13 @@ button {
 }
 
 
+.entry iframe {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-radius: 12px;
+  margin-top: 6px;
+}
 
 
 
