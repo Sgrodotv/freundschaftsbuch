@@ -135,14 +135,6 @@ button {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.entry img {
-  width: 100%;
-  max-width: 300px;
-  display: block;
-  margin: 0 auto 12px;
-  border-radius: 12px;
-}
-
 /* =========================
    BOOK – BILD-DARSTELLUNG
 ========================= */
@@ -155,6 +147,8 @@ button {
   margin: 0 auto 14px;
   border-radius: 14px;
 }
+
+
 
 
 
