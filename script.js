@@ -1,3 +1,6 @@
+console.log("script.js geladen ✅");
+
+
 // ==========================
 // SUPABASE KONFIGURATION
 // ==========================
@@ -109,4 +112,5 @@ form.reset();
 
   });
 }
+
 
