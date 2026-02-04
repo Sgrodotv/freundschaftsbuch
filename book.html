@@ -7,19 +7,16 @@
 
   <link rel="stylesheet" href="style.css">
 
-  <!-- Supabase -->
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-  <h1>📖 Freundschaftsbuch</h1>
-
-  <div id="book"></div>
+  <div class="container">
+    <h1>📖 Freundschaftsbuch</h1>
+    <div id="book"></div>
+  </div>
 
   <script>
-    // ==========================
-    // SUPABASE KONFIGURATION
-    // ==========================
     const SUPABASE_URL = "https://mvladicfytndyekrbzme.supabase.co";
     const SUPABASE_ANON_KEY =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12bGFkaWNmeXRuZHlla3Jiem1lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxMzM4MjksImV4cCI6MjA4NTcwOTgyOX0.eeTXlaU-DYqQqV5h-FaRsTigRvGKLhLVBvNHvCE2DJ4";
@@ -29,33 +26,21 @@
       SUPABASE_ANON_KEY
     );
 
-    // ==========================
-    // SPOTIFY HELPER
-    // ==========================
     function spotifyEmbed(url) {
       if (!url) return null;
-
       if (url.includes("spotify.com")) {
-        return url.replace(
-          "open.spotify.com/",
-          "open.spotify.com/embed/"
-        );
+        return url.replace("open.spotify.com/", "open.spotify.com/embed/");
       }
-
       return null;
     }
 
-    // ==========================
-    // EINTRÄGE LADEN
-    // ==========================
     async function loadEntries() {
       const book = document.getElementById("book");
       book.innerHTML = "Lade Einträge …";
 
       const { data, error } = await supabaseClient
         .from("entries")
-        .select("*")
-        .order("created_at", { ascending: false });
+        .select("*");
 
       if (error) {
         console.error(error);
@@ -71,27 +56,17 @@
 
         const embed = spotifyEmbed(entry.song);
 
-        const songHtml = embed
-          ? `<iframe
-               src="${embed}"
-               width="100%"
-               height="80"
-               frameborder="0"
-               allow="encrypted-media">
-             </iframe>`
-          : `<p><strong>Lieblingssong:</strong> ${entry.song || "-"}</p>`;
-
         card.innerHTML = `
-          ${entry.image_url ? `<img src="${entry.image_url}" alt="Bild">` : ""}
-
+          ${entry.image_url ? `<img src="${entry.image_url}">` : ""}
           <h2>${entry.name}</h2>
-
           <p><strong>Lieblingsessen:</strong> ${entry.food || "-"}</p>
           <p><strong>Lieblingsfarbe:</strong> ${entry.color || "-"}</p>
-
-          ${songHtml}
-
-          <p class="message">${entry.message || ""}</p>
+          ${
+            embed
+              ? `<iframe src="${embed}" width="100%" height="80" allow="encrypted-media"></iframe>`
+              : `<p><strong>Lieblingssong:</strong> ${entry.song || "-"}</p>`
+          }
+          <p>${entry.message || ""}</p>
         `;
 
         book.appendChild(card);
@@ -100,6 +75,5 @@
 
     loadEntries();
   </script>
-
 </body>
 </html>
