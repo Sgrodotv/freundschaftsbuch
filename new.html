@@ -1,52 +1,65 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Neuer Eintrag – Freundschaftsbuch</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Supabase -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-  <div class="card">
-    <h1>✍️ Neuer Eintrag</h1>
+  <h1>Neuer Freundschafts-Eintrag</h1>
 
-    <form id="entryForm">
-      <label>
-        Dein Name
-        <input type="text" id="name" required />
-      </label>
+  <form id="entryForm">
 
-      <label>
-        Lieblingsessen
-        <input type="text" id="food" />
-      </label>
+    <label>
+      Name
+      <input type="text" id="name" required>
+    </label>
 
-      <label>
-        Lieblingssong
-        <input type="text" id="song" />
-      </label>
+    <label>
+      Geburtstag
+      <input type="date" id="birthday">
+    </label>
 
-      <label>
-        Nachricht
-        <textarea id="message"></textarea>
-      </label>
+    <label>
+      Lieblingsessen
+      <input type="text" id="food">
+    </label>
 
-      <label>
-        Selfie
-        <input type="file" id="image" accept="image/*" required />
-      </label>
+    <label>
+      Lieblingsfarbe
+      <input type="text" id="color" placeholder="z. B. Blau">
+    </label>
 
-      <button class="btn" type="submit">💾 Eintrag speichern</button>
-    </form>
+    <label>
+      Lieblingssong
+      <input
+        type="text"
+        id="song"
+        placeholder="Spotify-Link (z. B. https://open.spotify.com/track/...)">
+    </label>
 
-    <p id="status"></p>
+    <label>
+      Nachricht
+      <textarea id="message" rows="4"></textarea>
+    </label>
 
-    <a href="book.html">📖 Freundschaftsbuch ansehen</a>
-  </div>
+    <label>
+      Bild hochladen
+      <input type="file" id="image" accept="image/*">
+    </label>
 
-  <!-- Supabase MUSS vor script.js -->
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <button type="submit">Eintrag speichern</button>
+
+  </form>
+
+  <p id="status"></p>
+
   <script src="script.js"></script>
 
 </body>
