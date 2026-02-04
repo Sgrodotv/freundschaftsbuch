@@ -111,64 +111,63 @@ function formatDate(dateString) {
   // ==========================
   // RENDER SINGLE ENTRY
   // ==========================
-  function renderEntry() {
-    const e = entries[currentIndex];
+function renderEntry() {
+  const e = entries[currentIndex];
 
-document.getElementById("entry").innerHTML = `
-  <div class="entry">
-    ${e.image_url ? `<img src="${e.image_url}" alt="Bild">` : ""}
-
-<h2 style="text-align:center;">${e.name}</h2>
-
-<!-- Geburtstag -->
-<p style="text-align:center; font-weight:bold; margin-top:14px;">
-  🎂 Geburtstag
-</p>
-<p style="text-align:center; margin-bottom:10px;">
-  ${formatDate(e.birthday)}
-</p>
-
-<!-- Lieblingsessen -->
-<p style="text-align:center; font-weight:bold; margin-top:14px;">
-  🍔 Lieblingsessen
-</p>
-<p style="text-align:center; margin-bottom:10px;">
-  ${e.food || "-"}
-</p>
-
-<!-- Lieblingsfarbe -->
-<p style="text-align:center; font-weight:bold; margin-top:14px;">
-  🎨 Lieblingsfarbe
-</p>
-<p style="text-align:center; margin-bottom:10px;">
-  ${e.color || "-"}
-</p>
-
-<!-- Lieblingssong -->
-${
-  e.song
-    ? `
+  let songHtml = "";
+  if (e.song) {
+    songHtml = `
       <p style="margin-top:16px; font-weight:bold; text-align:center;">
         🎵 Aktueller Lieblingssong:
       </p>
       ${spotifyEmbed(e.song)}
-    `
-    : ""
+    `;
+  }
+
+  document.getElementById("entry").innerHTML = `
+    <div class="entry">
+
+      ${e.image_url ? `<img src="${e.image_url}" alt="Bild">` : ""}
+
+      <h2 style="text-align:center;">${e.name}</h2>
+
+      <p style="text-align:center; font-weight:bold; margin-top:14px;">
+        🎂 Geburtstag
+      </p>
+      <p style="text-align:center;">
+        ${formatDate(e.birthday)}
+      </p>
+
+      <p style="text-align:center; font-weight:bold; margin-top:14px;">
+        🍔 Lieblingsessen
+      </p>
+      <p style="text-align:center;">
+        ${e.food || "-"}
+      </p>
+
+      <p style="text-align:center; font-weight:bold; margin-top:14px;">
+        🎨 Lieblingsfarbe
+      </p>
+      <p style="text-align:center;">
+        ${e.color || "-"}
+      </p>
+
+      ${songHtml}
+
+      <p style="text-align:center; font-weight:bold; margin-top:16px;">
+        💬 Meine Nachricht:
+      </p>
+      <p style="text-align:center;">
+        ${e.message || ""}
+      </p>
+
+      <p style="text-align:center; opacity:0.6; margin-top:10px;">
+        ${currentIndex + 1} / ${entries.length}
+      </p>
+
+    </div>
+  `;
 }
-
-<!-- Nachricht -->
-<p style="text-align:center; font-weight:bold; margin-top:16px;">
-  💬 Meine Nachricht:
-</p>
-<p style="text-align:center;">
-  ${e.message || ""}
-</p>
-
-<p style="text-align:center; opacity:0.6; margin-top:10px;">
-  ${currentIndex + 1} / ${entries.length}
-</p>
-
-
   // ==========================
   // NAVIGATION
   // ==========================
@@ -191,6 +190,7 @@ ${
 
 </body>
 </html>
+
 
 
 
