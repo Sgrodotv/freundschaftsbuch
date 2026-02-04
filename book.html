@@ -118,10 +118,12 @@ document.getElementById("entry").innerHTML = `
   <div class="entry">
     ${e.image_url ? `<img src="${e.image_url}" alt="Bild">` : ""}
 
-    <h2>${e.name}</h2>
+<h2>${e.name}</h2>
 
-    <p><strong>Lieblingsessen:</strong> ${e.food || "-"}</p>
-    <p><strong>Lieblingsfarbe:</strong> ${e.color || "-"}</p>
+<p><strong>Geburtstag:</strong> ${formatDate(e.birthday)}</p>
+
+<p><strong>Lieblingsessen:</strong> ${e.food || "-"}</p>
+<p><strong>Lieblingsfarbe:</strong> ${e.color || "-"}</p>
 
     ${spotifyEmbed(e.song)}
 
@@ -156,5 +158,6 @@ document.getElementById("entry").innerHTML = `
 
 </body>
 </html>
+
 
 
