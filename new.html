@@ -7,60 +7,63 @@
 
   <link rel="stylesheet" href="style.css">
 
-  <!-- Supabase -->
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-  <h1>Neuer Freundschafts-Eintrag</h1>
+  <div class="container">
 
-  <form id="entryForm">
+    <h1>Neuer Freundschafts-Eintrag</h1>
 
-    <label>
-      Name
-      <input type="text" id="name" required>
-    </label>
+    <form id="entryForm">
 
-    <label>
-      Geburtstag
-      <input type="date" id="birthday">
-    </label>
+      <label>
+        Name
+        <input type="text" id="name" required>
+      </label>
 
-    <label>
-      Lieblingsessen
-      <input type="text" id="food">
-    </label>
+      <label>
+        Geburtstag
+        <input type="date" id="birthday">
+      </label>
 
-    <label>
-      Lieblingsfarbe
-      <input type="text" id="color" placeholder="z. B. Blau">
-    </label>
+      <label>
+        Lieblingsessen
+        <input type="text" id="food">
+      </label>
 
-    <label>
-      Lieblingssong
-      <input
-        type="text"
-        id="song"
-        placeholder="Spotify-Link (z. B. https://open.spotify.com/track/...)">
-    </label>
+      <label>
+        Lieblingsfarbe
+        <input type="text" id="color">
+      </label>
 
-    <label>
-      Nachricht
-      <textarea id="message" rows="4"></textarea>
-    </label>
+      <label>
+        Lieblingssong
+        <input
+          type="text"
+          id="song"
+          placeholder="Spotify-Link (https://open.spotify.com/...)">
+      </label>
 
-    <label>
-      Bild hochladen
-      <input type="file" id="image" accept="image/*">
-    </label>
+      <label>
+        Nachricht
+        <textarea id="message" rows="4"></textarea>
+      </label>
 
-    <button type="submit">Eintrag speichern</button>
+      <label>
+        Bild hochladen
+        <input type="file" id="image" accept="image/*">
+      </label>
 
-  </form>
+      <button type="submit">Eintrag speichern</button>
 
-  <p id="status"></p>
+    </form>
 
-  <script src="script.js"></script>
+    <p id="status"></p>
 
-</body>
-</html>
+    <!-- NEU -->
+    <a href="book.html" id="toBook" style="display:none;">
+      📖 Zum Freundschaftsbuch
+    </a>
+
+  </div>
