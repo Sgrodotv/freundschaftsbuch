@@ -1,70 +1,61 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <title>Neuer Eintrag – Freundschaftsbuch</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Neuer Eintrag</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
-  <h1>Neuer Freundschafts-Eintrag</h1>
+  <div class="page-center">
 
-  <!-- 🔴 WICHTIG: id="entryForm" -->
-  <form id="entryForm">
+    <div class="card">
+      <h1>Neuer Freundschafts-Eintrag</h1>
 
-    <label>
-      Name
-      <input type="text" id="name" required />
-    </label>
+      <form id="entryForm">
 
-    <label>
-      Geburtstag
-      <input type="date" id="birthday" />
-    </label>
+        <label>Name
+          <input type="text" id="name" required>
+        </label>
 
-    <label>
-      Lieblingsessen
-      <input type="text" id="food" />
-    </label>
+        <label>Geburtstag
+          <input type="date" id="birthday">
+        </label>
 
-    <label>
-      Lieblingsfarbe
-      <input type="text" id="color" />
-    </label>
+        <label>Lieblingsessen
+          <input type="text" id="food">
+        </label>
 
-    <label>
-      Lieblingssong (Spotify-Link)
-      <input
-        type="url"
-        id="song"
-        placeholder="https://open.spotify.com/..."
-      />
-    </label>
+        <label>Lieblingsfarbe
+          <input type="text" id="color">
+        </label>
 
-    <label>
-      Nachricht
-      <textarea id="message"></textarea>
-    </label>
+        <label>Lieblingssong (Spotify-Link)
+          <input type="url" id="song" placeholder="https://open.spotify.com/...">
+        </label>
 
-    <label>
-      Bild hochladen
-      <input type="file" id="image" accept="image/*" />
-    </label>
+        <label>Nachricht
+          <textarea id="message"></textarea>
+        </label>
 
-    <!-- 🔴 WICHTIG: type="submit" -->
-    <button type="submit">Eintrag speichern</button>
-  </form>
+        <label>Bild hochladen
+          <input type="file" id="image" accept="image/*">
+        </label>
 
-  <!-- 🔴 Statusanzeige -->
-  <p id="status"></p>
+        <button type="submit">Eintrag speichern</button>
+      </form>
 
-  <!-- 🔴 Weiter-Button -->
-  <a href="book.html" id="toBook" style="display:none;">
-    📖 Zum Freundschaftsbuch
-  </a>
+      <p id="status"></p>
 
-  <!-- Script GANZ UNTEN -->
-  <script src="script.js"></script>
+      <a href="book.html" id="toBook" class="button secondary">
+        📖 Zum Freundschaftsbuch
+      </a>
+    </div>
+
+  </div>
+
+  <script src="script.js?v=3"></script>
 </body>
 </html>
