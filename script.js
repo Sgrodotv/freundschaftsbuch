@@ -5,7 +5,8 @@ const SUPABASE_URL = "https://mvladicfytndyekrbzme.supabase.co";
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12bGFkaWNmeXRuZHlla3Jiem1lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxMzM4MjksImV4cCI6MjA4NTcwOTgyOX0.eeTXlaU-DYqQqV5h-FaRsTigRvGKLhLVBvNHvCE2DJ4";
 
-const supabase = window.supabase.createClient(
+// WICHTIG: eigener Client-Name!
+const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
@@ -38,7 +39,6 @@ if (form) {
     const status = document.getElementById("status");
     status.textContent = "Speichern läuft …";
 
-    // Werte aus Formular
     const name = document.getElementById("name").value;
     const birthday = document.getElementById("birthday").value || null;
     const food = document.getElementById("food").value;
@@ -56,7 +56,7 @@ if (form) {
       const fileExt = imageFile.name.split(".").pop();
       const fileName = `${Date.now()}.${fileExt}`;
 
-      const { error: uploadError } = await supabase
+      const { error: uploadError } = await supabaseClient
         .storage
         .from("images")
         .upload(fileName, imageFile);
@@ -67,7 +67,7 @@ if (form) {
         return;
       }
 
-      const { data } = supabase
+      const { data } = supabaseClient
         .storage
         .from("images")
         .getPublicUrl(fileName);
@@ -78,7 +78,7 @@ if (form) {
     // ==========================
     // DATEN SPEICHERN
     // ==========================
-    const { error } = await supabase
+    const { error } = await supabaseClient
       .from("entries")
       .insert({
         name: name,
