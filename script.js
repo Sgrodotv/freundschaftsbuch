@@ -96,7 +96,17 @@ if (form) {
       return;
     }
 
-    status.textContent = "Eintrag gespeichert 🎉";
-    form.reset();
+status.textContent = "Eintrag gespeichert 🎉";
+
+document.getElementById("toBook").style.display = "block";
+
+// optional: automatische Weiterleitung
+setTimeout(() => {
+  window.location.href = "book.html";
+}, 2000);
+
+form.reset();
+
   });
 }
+
