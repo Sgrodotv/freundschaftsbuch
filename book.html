@@ -118,32 +118,56 @@ document.getElementById("entry").innerHTML = `
   <div class="entry">
     ${e.image_url ? `<img src="${e.image_url}" alt="Bild">` : ""}
 
-<h2>${e.name}</h2>
+<h2 style="text-align:center;">${e.name}</h2>
 
-<p><strong>Geburtstag:</strong> ${formatDate(e.birthday)}</p>
+<!-- Geburtstag -->
+<p style="text-align:center; font-weight:bold; margin-top:14px;">
+  🎂 Geburtstag
+</p>
+<p style="text-align:center; margin-bottom:10px;">
+  ${formatDate(e.birthday)}
+</p>
 
-<p><strong>Lieblingsessen:</strong> ${e.food || "-"}</p>
-<p><strong>Lieblingsfarbe:</strong> ${e.color || "-"}</p>
+<!-- Lieblingsessen -->
+<p style="text-align:center; font-weight:bold; margin-top:14px;">
+  🍔 Lieblingsessen
+</p>
+<p style="text-align:center; margin-bottom:10px;">
+  ${e.food || "-"}
+</p>
 
-    ${
+<!-- Lieblingsfarbe -->
+<p style="text-align:center; font-weight:bold; margin-top:14px;">
+  🎨 Lieblingsfarbe
+</p>
+<p style="text-align:center; margin-bottom:10px;">
+  ${e.color || "-"}
+</p>
+
+<!-- Lieblingssong -->
+${
   e.song
     ? `
-      <p style="margin-top:12px; font-weight:bold; text-align:center;">
-        🎵 Aktueller Lieblingssong
+      <p style="margin-top:16px; font-weight:bold; text-align:center;">
+        🎵 Aktueller Lieblingssong:
       </p>
       ${spotifyEmbed(e.song)}
     `
     : ""
 }
 
-    <p>${e.message || ""}</p>
+<!-- Nachricht -->
+<p style="text-align:center; font-weight:bold; margin-top:16px;">
+  💬 Meine Nachricht:
+</p>
+<p style="text-align:center;">
+  ${e.message || ""}
+</p>
 
-    <p style="text-align:center; opacity:0.6;">
-      ${currentIndex + 1} / ${entries.length}
-    </p>
-  </div>
-`;
-  }
+<p style="text-align:center; opacity:0.6; margin-top:10px;">
+  ${currentIndex + 1} / ${entries.length}
+</p>
+
 
   // ==========================
   // NAVIGATION
@@ -167,6 +191,7 @@ document.getElementById("entry").innerHTML = `
 
 </body>
 </html>
+
 
 
 
