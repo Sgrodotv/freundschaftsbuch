@@ -125,7 +125,16 @@ document.getElementById("entry").innerHTML = `
 <p><strong>Lieblingsessen:</strong> ${e.food || "-"}</p>
 <p><strong>Lieblingsfarbe:</strong> ${e.color || "-"}</p>
 
-    ${spotifyEmbed(e.song)}
+    ${
+  e.song
+    ? `
+      <p style="margin-top:12px; font-weight:bold; text-align:center;">
+        🎵 Aktueller Lieblingssong
+      </p>
+      ${spotifyEmbed(e.song)}
+    `
+    : ""
+}
 
     <p>${e.message || ""}</p>
 
@@ -158,6 +167,7 @@ document.getElementById("entry").innerHTML = `
 
 </body>
 </html>
+
 
 
 
