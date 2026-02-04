@@ -139,11 +139,10 @@ button {
    BOOK – BILD-DARSTELLUNG
 ========================= */
 .entry img {
-  width: 100%;
-  max-width: 260px;
-  height: 260px;        /* feste, schöne Buchgröße */
-  object-fit: cover;   /* kein Verzerren */
   display: block;
+  width: 100%;
+  max-width: 260px;   /* maximale Bildbreite */
+  height: auto;       /* ORIGINALFORMAT */
   margin: 0 auto 14px;
   border-radius: 14px;
 }
@@ -156,6 +155,7 @@ button {
   border-radius: 12px;
   margin-top: 6px;
 }
+
 
 
 
