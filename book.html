@@ -4,76 +4,75 @@
   <meta charset="UTF-8">
   <title>Freundschaftsbuch</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" href="style.css">
-
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
-<body>
 
-  <div class="container">
-    <h1>📖 Freundschaftsbuch</h1>
-    <div id="book"></div>
+<body>
+  <div class="page-center">
+    <div class="card">
+
+      <h1>📖 Freundschaftsbuch</h1>
+
+      <div id="entry"></div>
+
+      <div class="nav">
+        <button id="prev">⬅️</button>
+        <button id="next">➡️</button>
+      </div>
+
+      <a href="index.html" class="button secondary">
+        ⬅️ Zur Startseite
+      </a>
+
+    </div>
   </div>
 
-  <script>
-    const SUPABASE_URL = "https://mvladicfytndyekrbzme.supabase.co";
-    const SUPABASE_ANON_KEY =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12bGFkaWNmeXRuZHlla3Jiem1lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxMzM4MjksImV4cCI6MjA4NTcwOTgyOX0.eeTXlaU-DYqQqV5h-FaRsTigRvGKLhLVBvNHvCE2DJ4";
+<script>
+const SUPABASE_URL = "https://mvladicfytndyekrbzme.supabase.co";
+const SUPABASE_KEY = "DEIN_ANON_KEY";
 
-    const supabaseClient = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
-    );
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    function spotifyEmbed(url) {
-      if (!url) return null;
-      if (url.includes("spotify.com")) {
-        return url.replace("open.spotify.com/", "open.spotify.com/embed/");
-      }
-      return null;
-    }
+let entries = [];
+let index = 0;
 
-    async function loadEntries() {
-      const book = document.getElementById("book");
-      book.innerHTML = "Lade Einträge …";
+function spotifyEmbed(url) {
+  if (!url) return "";
+  const m = url.match(/spotify\.com\/(?:intl-[a-z]{2}\/)?(track|album|playlist)\/([a-zA-Z0-9]+)/);
+  return m ? `<iframe src="https://open.spotify.com/embed/${m[1]}/${m[2]}" height="80"></iframe>` : "";
+}
 
-      const { data, error } = await supabaseClient
-        .from("entries")
-        .select("*");
+async function load() {
+  const res = await supabase.from("entries").select("*");
+  entries = res.data || [];
+  show();
+}
 
-      if (error) {
-        console.error(error);
-        book.innerHTML = "Fehler beim Laden";
-        return;
-      }
+function show() {
+  if (!entries.length) return;
 
-      book.innerHTML = "";
+  const e = entries[index];
+  document.getElementById("entry").innerHTML = `
+    ${e.image_url ? `<img src="${e.image_url}">` : ""}
+    <h2>${e.name}</h2>
+    <p><b>Lieblingsessen:</b> ${e.food || "-"}</p>
+    <p><b>Lieblingsfarbe:</b> ${e.color || "-"}</p>
+    ${spotifyEmbed(e.song)}
+    <p>${e.message || ""}</p>
+  `;
+}
 
-      data.forEach(entry => {
-        const card = document.createElement("div");
-        card.className = "entry";
+document.getElementById("prev").onclick = () => {
+  index = Math.max(0, index - 1);
+  show();
+};
+document.getElementById("next").onclick = () => {
+  index = Math.min(entries.length - 1, index + 1);
+  show();
+};
 
-        const embed = spotifyEmbed(entry.song);
-
-        card.innerHTML = `
-          ${entry.image_url ? `<img src="${entry.image_url}">` : ""}
-          <h2>${entry.name}</h2>
-          <p><strong>Lieblingsessen:</strong> ${entry.food || "-"}</p>
-          <p><strong>Lieblingsfarbe:</strong> ${entry.color || "-"}</p>
-          ${
-            embed
-              ? `<iframe src="${embed}" width="100%" height="80" allow="encrypted-media"></iframe>`
-              : `<p><strong>Lieblingssong:</strong> ${entry.song || "-"}</p>`
-          }
-          <p>${entry.message || ""}</p>
-        `;
-
-        book.appendChild(card);
-      });
-    }
-
-    loadEntries();
-  </script>
+load();
+</script>
 </body>
 </html>
