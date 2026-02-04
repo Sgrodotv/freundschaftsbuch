@@ -1,41 +1,30 @@
-/* =========================
-   RESET / BASIS
-========================= */
+/* ========= BASIS ========= */
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  padding: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, sans-serif;
   background: #f6f3ee;
   color: #333;
-  display: flex;
-  justify-content: center;
 }
 
-/* =========================
-   CONTAINER
-========================= */
+/* ========= CONTAINER ========= */
 .container {
-  width: 100%;
   max-width: 420px;
+  margin: 0 auto;
   padding: 20px;
 }
 
-/* =========================
-   HEADLINES
-========================= */
+/* ========= HEADLINES ========= */
 h1 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* =========================
-   FORM
-========================= */
+/* ========= FORM ========= */
 form {
   background: #fff;
   padding: 16px;
@@ -75,22 +64,15 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background: #d9a652;
-}
-
-/* =========================
-   STATUS + LINK
-========================= */
+/* ========= STATUS & BUTTON ========= */
 #status {
   margin-top: 14px;
   text-align: center;
   font-weight: bold;
 }
 
-/* Button / Link zur Book-Seite */
 .to-book {
-  display: none;              /* WICHTIG */
+  display: none;
   margin-top: 16px;
   text-align: center;
   font-weight: bold;
@@ -102,17 +84,7 @@ button:hover {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
-.to-book:hover {
-  background: #f0f0f0;
-}
-
-/* =========================
-   BOOK / EINTRÄGE
-========================= */
-#book {
-  margin-top: 20px;
-}
-
+/* ========= BOOK ========= */
 .entry {
   background: #fff;
   padding: 16px;
@@ -121,29 +93,10 @@ button:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.entry h2 {
-  text-align: center;
-  margin: 10px 0;
-}
-
-/* Bilder im Buch */
 .entry img {
   width: 100%;
   max-width: 300px;
-  height: auto;
   display: block;
   margin: 0 auto 12px;
   border-radius: 12px;
-}
-
-/* Spotify Embed */
-.entry iframe {
-  margin-top: 8px;
-  border-radius: 12px;
-}
-
-/* Nachricht */
-.entry .message {
-  margin-top: 10px;
-  font-style: italic;
 }
