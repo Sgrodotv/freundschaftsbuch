@@ -87,8 +87,9 @@ function formatDate(dateString) {
   
   async function loadEntries() {
     const { data, error } = await supabaseClient
-      .from("entries")
-      .select("*");
+.from("entries")
+.select("*")
+.order("created_at", { ascending: false });
 
     if (error) {
       console.error(error);
@@ -190,6 +191,7 @@ function renderEntry() {
 
 </body>
 </html>
+
 
 
 
