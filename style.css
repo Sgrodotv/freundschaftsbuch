@@ -143,5 +143,18 @@ button {
   border-radius: 12px;
 }
 
+/* =========================
+   BOOK – BILD-DARSTELLUNG
+========================= */
+.entry img {
+  display: block;
+  width: 100%;
+  max-width: 260px;     /* maximale Bildbreite */
+  height: auto;         /* Seitenverhältnis bleibt korrekt */
+  margin: 0 auto 14px;  /* zentriert + Abstand nach unten */
+  border-radius: 14px;
+  object-fit: cover;
+}
+
 
 
